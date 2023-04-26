@@ -36,7 +36,7 @@ function drawX(i, permanent) {
     let y = grid_centers[i][1];
     X_size = window.innerWidth * 0.07
 
-    c[i].lineWidth = 15;
+    c[i].lineWidth = 0.15 * 0.08 * window.innerWidth;
 
     c[i].strokeStyle = "black";
     if (permanent == false) {
@@ -59,7 +59,7 @@ function drawO(i, permanent) {
     let y = grid_centers[i][1];
     X_size = window.innerWidth * 0.07
 
-    c[i].lineWidth = 15;
+    c[i].lineWidth = 0.15 * 0.08 * window.innerWidth;
 
     c[i].strokeStyle = "black";
     if (permanent == false) {

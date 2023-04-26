@@ -229,7 +229,7 @@ function mark_result(state) {
         row = state[i];
         if (row[0] === row[1] && row[0] === row[2]) {
             if (row[0] != ' ') {
-                c[3 * i].lineWidth = 15;
+                c[3 * i].lineWidth = 0.15 * 0.08 * window.innerWidth;
                 c[3 * i].strokeStyle = "red";
                 c[3 * i + 1].strokeStyle = "red";
                 c[3 * i + 2].strokeStyle = "red";
@@ -256,7 +256,7 @@ function mark_result(state) {
     for (let i = 0; i < 3; i++) {
         if (state[0][i] === state[1][i] && state[0][i] === state[2][i]) {
             if (state[0][i] != ' ') {
-                c[i].lineWidth = 15;
+                c[i].lineWidth = 0.15 * 0.08 * window.innerWidth;
                 c[i].strokeStyle = "red";
                 c[i + 3].strokeStyle = "red";
                 c[i + 6].strokeStyle = "red";
