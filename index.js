@@ -2,6 +2,7 @@ var grid = document.querySelectorAll("canvas");
 var grid_centers = [];
 var c = [];
 var playerStarts = true;
+var difficulty = 1;
 
 for (var i = 0; i < 9; i++) {
     let l = "38%";
@@ -98,6 +99,7 @@ openPopupBtn.addEventListener('click', () => {
 });
 
 btn1.addEventListener('click', () => {
+    difficulty = 1;
     popup.style.display = 'none';
     playerStarts = !playerStarts;
     for (var i = 0; i < 9; i++) {
@@ -110,22 +112,6 @@ btn1.addEventListener('click', () => {
     grid[0].addEventListener('mouseover', mover0);
     grid[0].addEventListener('mouseout', mout0);
     grid[0].addEventListener('click', clicked0);
-
-    if (playerStarts == false) {
-        // game_tree = generate_game_tree(state, 'X');
-        game_tree = game_tree.children[0];
-        console.log("oyre bande");
-        console.log(game_tree.state);
-        console.log("whoo");
-        drawX(0, true);
-        state = [['X', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']];
-        console.log("whoo");
-        // gamePlay(0);
-        grid[0].removeEventListener('click', clicked0);
-        grid[0].removeEventListener('mouseout', mout0);
-        grid[0].removeEventListener('mouseover', mover0);
-    }
-
 
     grid[1].addEventListener('mouseover', mover1);
     grid[1].addEventListener('mouseout', mout1);
@@ -160,102 +146,168 @@ btn1.addEventListener('click', () => {
     grid[8].addEventListener('click', clicked8);
 
 
+    if (playerStarts == false) {
+        let randomIndex = Math.floor(Math.random() * game_tree.children.length);
+        let chosenIndex = 0;
+
+        game_tree = game_tree.children[randomIndex];
+        chosenIndex = randomIndex;
+
+        drawX(chosenIndex, true);
+        let x = Math.floor(chosenIndex / 3);
+        let y = chosenIndex % 3;
+        state[x][y] = 'X';
+        // gamePlay(0);
+
+        clicked = [clicked0, clicked1, clicked2, clicked3, clicked4, clicked5, clicked6, clicked7, clicked8];
+        mout = [mout0, mout1, mout2, mout3, mout4, mout5, mout6, mout7, mout8];
+        mover = [mover0, mover1, mover2, mover3, mover4, mover5, mover6, mover7, mover8];
+        grid[chosenIndex].removeEventListener('click', clicked[chosenIndex]);
+        grid[chosenIndex].removeEventListener('mouseout', mout[chosenIndex]);
+        grid[chosenIndex].removeEventListener('mouseover', mover[chosenIndex]);
+    }
+
+
 });
 
 btn2.addEventListener('click', () => {
+    difficulty = 2;
     popup.style.display = 'none';
+    playerStarts = !playerStarts;
     for (var i = 0; i < 9; i++) {
         c[i].clearRect(0, 0, windowWidth * 0.8, windowWidth * 0.8);
-        state = [[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']];
-        game_tree = generate_game_tree(state, 'X');
-        markX = [false, false, false, false, false, false, false, false, false];
-        playerStarts = !playerStarts;
-        moves = 0;
-        grid[0].addEventListener('mouseover', mover0);
-        grid[0].addEventListener('mouseout', mout0);
-        grid[0].addEventListener('click', clicked0);
-
-        grid[1].addEventListener('mouseover', mover1);
-        grid[1].addEventListener('mouseout', mout1);
-        grid[1].addEventListener('click', clicked1);
-
-        grid[2].addEventListener('mouseover', mover2);
-        grid[2].addEventListener('mouseout', mout2);
-        grid[2].addEventListener('click', clicked2);
-
-        grid[3].addEventListener('mouseover', mover3);
-        grid[3].addEventListener('mouseout', mout3);
-        grid[3].addEventListener('click', clicked3);
-
-        grid[4].addEventListener('mouseover', mover4);
-        grid[4].addEventListener('mouseout', mout4);
-        grid[4].addEventListener('click', clicked4);
-
-        grid[5].addEventListener('mouseover', mover5);
-        grid[5].addEventListener('mouseout', mout5);
-        grid[5].addEventListener('click', clicked5);
-
-        grid[6].addEventListener('mouseover', mover6);
-        grid[6].addEventListener('mouseout', mout6);
-        grid[6].addEventListener('click', clicked6);
-
-        grid[7].addEventListener('mouseover', mover7);
-        grid[7].addEventListener('mouseout', mout7);
-        grid[7].addEventListener('click', clicked7);
-
-        grid[8].addEventListener('mouseover', mover8);
-        grid[8].addEventListener('mouseout', mout8);
-        grid[8].addEventListener('click', clicked8);
-
     }
+    moves = 0;
+    state = [[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']];
+    game_tree = generate_game_tree(state, 'X');
+    markX = [false, false, false, false, false, false, false, false, false];
+    grid[0].addEventListener('mouseover', mover0);
+    grid[0].addEventListener('mouseout', mout0);
+    grid[0].addEventListener('click', clicked0);
+
+    grid[1].addEventListener('mouseover', mover1);
+    grid[1].addEventListener('mouseout', mout1);
+    grid[1].addEventListener('click', clicked1);
+
+    grid[2].addEventListener('mouseover', mover2);
+    grid[2].addEventListener('mouseout', mout2);
+    grid[2].addEventListener('click', clicked2);
+
+    grid[3].addEventListener('mouseover', mover3);
+    grid[3].addEventListener('mouseout', mout3);
+    grid[3].addEventListener('click', clicked3);
+
+    grid[4].addEventListener('mouseover', mover4);
+    grid[4].addEventListener('mouseout', mout4);
+    grid[4].addEventListener('click', clicked4);
+
+    grid[5].addEventListener('mouseover', mover5);
+    grid[5].addEventListener('mouseout', mout5);
+    grid[5].addEventListener('click', clicked5);
+
+    grid[6].addEventListener('mouseover', mover6);
+    grid[6].addEventListener('mouseout', mout6);
+    grid[6].addEventListener('click', clicked6);
+
+    grid[7].addEventListener('mouseover', mover7);
+    grid[7].addEventListener('mouseout', mout7);
+    grid[7].addEventListener('click', clicked7);
+
+    grid[8].addEventListener('mouseover', mover8);
+    grid[8].addEventListener('mouseout', mout8);
+    grid[8].addEventListener('click', clicked8);
+
+    if (playerStarts == false) {
+        let randomIndex = Math.floor(Math.random() * game_tree.children.length);
+        let chosenIndex = 0;
+
+        let choice = Math.round(Math.random()); // 0 or 1
+        chosenIndex = choice === 0 ? game_tree.best_child_index : randomIndex;
+        game_tree = game_tree.children[chosenIndex];
+
+        drawX(chosenIndex, true);
+        let x = Math.floor(chosenIndex / 3);
+        let y = chosenIndex % 3;
+        state[x][y] = 'X';
+        // gamePlay(0);
+        clicked = [clicked0, clicked1, clicked2, clicked3, clicked4, clicked5, clicked6, clicked7, clicked8];
+        mout = [mout0, mout1, mout2, mout3, mout4, mout5, mout6, mout7, mout8];
+        mover = [mover0, mover1, mover2, mover3, mover4, mover5, mover6, mover7, mover8];
+        grid[chosenIndex].removeEventListener('click', clicked[chosenIndex]);
+        grid[chosenIndex].removeEventListener('mouseout', mout[chosenIndex]);
+        grid[chosenIndex].removeEventListener('mouseover', mover[chosenIndex]);
+    }
+
+
 });
 
 btn3.addEventListener('click', () => {
+    difficulty = 3;
     popup.style.display = 'none';
+    playerStarts = !playerStarts;
     for (var i = 0; i < 9; i++) {
         c[i].clearRect(0, 0, windowWidth * 0.8, windowWidth * 0.8);
-        state = [[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']];
-        game_tree = generate_game_tree(state, 'X');
-        markX = [false, false, false, false, false, false, false, false, false];
-        playerStarts = !playerStarts;
-        moves = 0;
-        grid[0].addEventListener('mouseover', mover0);
-        grid[0].addEventListener('mouseout', mout0);
-        grid[0].addEventListener('click', clicked0);
-
-        grid[1].addEventListener('mouseover', mover1);
-        grid[1].addEventListener('mouseout', mout1);
-        grid[1].addEventListener('click', clicked1);
-
-        grid[2].addEventListener('mouseover', mover2);
-        grid[2].addEventListener('mouseout', mout2);
-        grid[2].addEventListener('click', clicked2);
-
-        grid[3].addEventListener('mouseover', mover3);
-        grid[3].addEventListener('mouseout', mout3);
-        grid[3].addEventListener('click', clicked3);
-
-        grid[4].addEventListener('mouseover', mover4);
-        grid[4].addEventListener('mouseout', mout4);
-        grid[4].addEventListener('click', clicked4);
-
-        grid[5].addEventListener('mouseover', mover5);
-        grid[5].addEventListener('mouseout', mout5);
-        grid[5].addEventListener('click', clicked5);
-
-        grid[6].addEventListener('mouseover', mover6);
-        grid[6].addEventListener('mouseout', mout6);
-        grid[6].addEventListener('click', clicked6);
-
-        grid[7].addEventListener('mouseover', mover7);
-        grid[7].addEventListener('mouseout', mout7);
-        grid[7].addEventListener('click', clicked7);
-
-        grid[8].addEventListener('mouseover', mover8);
-        grid[8].addEventListener('mouseout', mout8);
-        grid[8].addEventListener('click', clicked8);
-
     }
+    moves = 0;
+    state = [[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']];
+    game_tree = generate_game_tree(state, 'X');
+    markX = [false, false, false, false, false, false, false, false, false];
+    grid[0].addEventListener('mouseover', mover0);
+    grid[0].addEventListener('mouseout', mout0);
+    grid[0].addEventListener('click', clicked0);
+
+    grid[1].addEventListener('mouseover', mover1);
+    grid[1].addEventListener('mouseout', mout1);
+    grid[1].addEventListener('click', clicked1);
+
+    grid[2].addEventListener('mouseover', mover2);
+    grid[2].addEventListener('mouseout', mout2);
+    grid[2].addEventListener('click', clicked2);
+
+    grid[3].addEventListener('mouseover', mover3);
+    grid[3].addEventListener('mouseout', mout3);
+    grid[3].addEventListener('click', clicked3);
+
+    grid[4].addEventListener('mouseover', mover4);
+    grid[4].addEventListener('mouseout', mout4);
+    grid[4].addEventListener('click', clicked4);
+
+    grid[5].addEventListener('mouseover', mover5);
+    grid[5].addEventListener('mouseout', mout5);
+    grid[5].addEventListener('click', clicked5);
+
+    grid[6].addEventListener('mouseover', mover6);
+    grid[6].addEventListener('mouseout', mout6);
+    grid[6].addEventListener('click', clicked6);
+
+    grid[7].addEventListener('mouseover', mover7);
+    grid[7].addEventListener('mouseout', mout7);
+    grid[7].addEventListener('click', clicked7);
+
+    grid[8].addEventListener('mouseover', mover8);
+    grid[8].addEventListener('mouseout', mout8);
+    grid[8].addEventListener('click', clicked8);
+
+    if (playerStarts == false) {
+        let chosenIndex = 0;
+
+        chosenIndex = game_tree.best_child_index;
+        game_tree = game_tree.children[game_tree.best_child_index];
+
+        drawX(chosenIndex, true);
+        let x = Math.floor(chosenIndex / 3);
+        let y = chosenIndex % 3;
+        state[x][y] = 'X';
+        // gamePlay(0);
+        clicked = [clicked0, clicked1, clicked2, clicked3, clicked4, clicked5, clicked6, clicked7, clicked8];
+        mout = [mout0, mout1, mout2, mout3, mout4, mout5, mout6, mout7, mout8];
+        mover = [mover0, mover1, mover2, mover3, mover4, mover5, mover6, mover7, mover8];
+        grid[chosenIndex].removeEventListener('click', clicked[chosenIndex]);
+        grid[chosenIndex].removeEventListener('mouseout', mout[chosenIndex]);
+        grid[chosenIndex].removeEventListener('mouseover', mover[chosenIndex]);
+    }
+
+
 });
 
 markX = [false, false, false, false, false, false, false, false, false];

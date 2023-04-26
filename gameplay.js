@@ -1,7 +1,23 @@
 function gamePlay(i) {
 
     state = update_state(i, state);
-    console.log(state);
+    console.log("state");
+    console.log(game_tree.children.length);
+
+
+
+    for (let i = 0; i < game_tree.children.length; i++) {
+        if (compareMatrices(game_tree.children[i].state, state)) {
+
+            game_tree = game_tree.children[i];
+            moves += 1;
+
+            if (moves == 9) {
+                console.log("Draw");
+            }
+
+        }
+    }
 
     if (game_tree.children.length == 0) {
         console.log("player wins");
@@ -45,24 +61,17 @@ function gamePlay(i) {
     }
 
 
-
-    for (let i = 0; i < game_tree.children.length; i++) {
-        if (compareMatrices(game_tree.children[i].state, state)) {
-
-            game_tree = game_tree.children[i];
-            moves += 1;
-
-            if (moves == 9) {
-                console.log("Draw");
-            }
-
-        }
-    }
-
-
     console.log("next");
-
-    game_tree = game_tree.children[game_tree.best_child_index];
+    let randomIndex = Math.floor(Math.random() * game_tree.children.length);
+    if (difficulty == 3) {
+        game_tree = game_tree.children[game_tree.best_child_index];
+    } else if (difficulty == 2) {
+        let choice = Math.round(Math.random()); // 0 or 1
+        let chosenIndex = choice === 0 ? game_tree.best_child_index : randomIndex;
+        game_tree = game_tree.children[chosenIndex];
+    } else {
+        game_tree = game_tree.children[randomIndex];
+    }
     let new_index = 0;
     for (let i = 0; i < 9; i++) {
         let x = Math.floor(i / 3);
